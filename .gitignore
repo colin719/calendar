@@ -1,9 +1,15 @@
 *.class
 
+# temp dir #
 dist/
 target/
 build/
+logs/*
+
+# idea #
 .idea/
+*.iml
+
 # Package Files #
 *.jar
 *.war
