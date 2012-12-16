@@ -39,6 +39,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.soso.calendar.entity.User;
 import org.springside.modules.utils.Encodes;
 
+import com.google.common.base.Objects;
+
 public class ShiroDbRealm extends AuthorizingRealm {
 
 	protected AccountService accountService;
@@ -119,7 +121,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		 */
 		@Override
 		public int hashCode() {
-			return HashCodeBuilder.reflectionHashCode(this, "loginName");
+			return Objects.hashCode(loginName);
 		}
 
 		/**
@@ -127,7 +129,19 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		 */
 		@Override
 		public boolean equals(Object obj) {
-			return EqualsBuilder.reflectionEquals(this, obj, "loginName");
+			if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			ShiroUser other = (ShiroUser) obj;
+			if (loginName == null) {
+				if (other.loginName != null)
+					return false;
+			} else if (!loginName.equals(other.loginName))
+				return false;
+			return true;
 		}
 	}
 }
